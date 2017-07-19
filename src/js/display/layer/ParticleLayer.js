@@ -1,6 +1,6 @@
 'use strict';
 
-class Layer extends PIXI.Container {
+class ParticleLayer extends PIXI.ParticleContainer {
   constructor(){
     super();
   }

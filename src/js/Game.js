@@ -5,24 +5,21 @@ class Game {
   constructor() {
     this.stage = null;
     this._renderer = null;
-    this._state = null;
+    this._input = null;
     this._loadComplete = false;
   }
 
   _loadGame(){
-    this._renderer = new PIXI.autoDetectRenderer(800, 600);
+    this._renderer = new PIXI.autoDetectRenderer(CONFIG.canvas.width, CONFIG.canvas.height, CONFIG.canvas.options);
     document.body.appendChild(this._renderer.view);
     this.stage = new PIXI.Container();
-    console.log(this.stage)
-
-    // this.stage.interactive = true;
-    // this.stage.on("click", function(e){console.log("clickstage", e)})
     this._renderer.render(this.stage);
-    Utils.scaleToWindow(this._renderer.view);
 
-    this._loadComplete = true;
+    Utils.scaleToWindow(this._renderer.view);
+    Input.init(this._renderer);
 
     //load graphics
+    this._loadComplete = true;
     this.start();
   }
 
@@ -32,6 +29,8 @@ class Game {
         new FirstState('FirstState'),
         new SecondState('SecondState'));
       this._states.setActiveState('FirstState');
+      Collision.init(PIXI, this._states);
+
       this._gameLoop();
     } else {
       this._loadGame();
@@ -45,6 +44,8 @@ class Game {
       this._states.setActiveState('SecondState');
     }
     this._states.update();
+    Input.update();
+    Collision.update();
     requestAnimationFrame(this._gameLoop.bind(this));
     this._renderer.render(this.stage);
   }

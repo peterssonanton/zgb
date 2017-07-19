@@ -18,15 +18,19 @@ class FirstState extends State {
   setup(){
 
     this.sprite = new TestSprite();
+    this.sprite2 = new TestSprite();
   //  console.log(this.sprite)
     this.layer.addChild(this.sprite);
+    this.layer.addChild(this.sprite2);
+    this.sprite2.y = 450;
+    this.sprite2.x = 500;
+    this.sprite2.direction = "UP";
+    this.sprite.direction = "RIGHT";
+
   }
 
   update(){
-    this.sprite.x += 1;
-    if(this.sprite.x > 400){
-      this._stateCompleted(ENDSTATES.GAME_OVER);
-    }
+
   }
 
 

@@ -8,9 +8,16 @@ class State extends PIXI.Container{
     this._layers = new Set();
     this._isCompleted = false;
     this.paused = false;
-    this.endStates = new Set("ENDED", "CLEARED", "PAUSED")
   }
 
+  reset(options){
+
+  }
+
+  resume(options){
+
+  }
+  
   run(){
     this._layers.forEach(function(layer) {
       layer.update();
@@ -24,11 +31,11 @@ class State extends PIXI.Container{
   }
 
   getLayers(){
-    return this.children;
+    return this._layers;
   }
 
   addChild(child){
-    if(child instanceof Layer){
+    if((child instanceof Layer) || (child instanceof ParticleLayer)){
       this._layers.add(child);
       super.addChild(child);
     } else {

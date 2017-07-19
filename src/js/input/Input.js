@@ -1,38 +1,39 @@
 'use strict';
 
-class Input extends PIXI.interaction.InteractionManager{
+class Input {
 
-  constructor(renderer, options){
-    super(renderer, options);
-    this.initKeys();
+  static init(renderer){
+    this._tink = new Tink(PIXI, renderer.view);
+    this._initKeys();
+    renderer.view
+    this._pointer = this._tink.makePointer();
+
+    // Disable the default right-click
+    renderer.view.addEventListener('contextmenu', (event) => {
+      event.preventDefault();
+    });
   }
 
-  initKeys(){
+  static _initKeys(){
     this.ARROW_UP = false;
     this.ARROW_DOWN = false;
     this.ARROW_LEFT = false;
     this.ARROW_RIGHT = false;
+
+    this.MOUSE_LEFT_DOWN = false;
+    this.MOUSE_RIGHT_DOWN = false;
   }
 
-  getControls(){
+  static update(){
+    this._tink.update();
 
-  }
-
-  pressed(key){
-    return this.key;
-  }
-
-  pressedOnce(key){
-    let ret = this.key;
-    this.initKeys();
-    return ret;
-  }
-
-  _keyDownHandler(){
+    this.MOUSE_RIGHT_DOWN = this._pointer.rightDown;
+    this.MOUSE_LEFT_DOWN = this._pointer.isDown;
 
   }
 
-  _keyUpHandler(){
-
+  static getPointerPosition(){
+    return new PIXI.Point(this._pointer.x, this._pointer.y);
   }
+
 }
