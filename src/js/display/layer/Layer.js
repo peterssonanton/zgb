@@ -17,6 +17,14 @@ class Layer extends PIXI.Container {
     });
   }
 
+  addChild(child){
+    if(child instanceof InteractiveSprite){
+      super.addChild(child);
+    } else {
+      console.log("Could not add "+child+", must be instance of InteractiveSprite")
+    }
+  }
+
   dispose(){
     this.getChildren().forEach(function(child) {
       if(child instanceof InteractiveSprite){

@@ -15,6 +15,8 @@ class Entity extends InteractiveSprite {
   getHitArea(){
     this._hitArea.x = this.x + this.offsetX;
     this._hitArea.y = this.y + this.offsetY;
+    this._hitArea.width = this.hitWidth;
+    this._hitArea.height = this.hitHeight;
     return this._hitArea;
 
   }

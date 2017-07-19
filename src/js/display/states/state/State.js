@@ -2,9 +2,10 @@
 
 class State extends PIXI.Container{
 
-  constructor(){
+  constructor(name, nextState){
     super();
-    this.name = ""
+    this.name = name;
+    this._nextState = nextState;
     this._layers = new Set();
     this._isCompleted = false;
     this.paused = false;
@@ -17,7 +18,7 @@ class State extends PIXI.Container{
   resume(options){
 
   }
-  
+
   run(){
     this._layers.forEach(function(layer) {
       layer.update();
@@ -39,7 +40,7 @@ class State extends PIXI.Container{
       this._layers.add(child);
       super.addChild(child);
     } else {
-      console.log("Not a layer", child)
+      console.log("Could not add "+child+", must be instance of Layer")
     }
   }
 
@@ -49,11 +50,15 @@ class State extends PIXI.Container{
     });
   }
 
-  _stateCompleted(endState){
-    this._isCompleted = endState;
+  stateIsCompleted(nextState){
+    this._isCompleted = nextState || Endstates.NEXT;
   }
 
-  isCompleted(endState){
+  isCompleted(){
     return this._isCompleted;
+  }
+
+  getNextState(){
+    return this._nextState;
   }
 }

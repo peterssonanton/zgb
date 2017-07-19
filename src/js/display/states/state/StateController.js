@@ -12,19 +12,30 @@ class StateController {
     if(!this.getActiveState().paused && !this.getActiveState().isCompleted()){
       this.getActiveState().run();
     }
+    let next = this.getActiveState().isCompleted();
+    if(next){
+      this.setActiveState(next);
+    }
   }
 
-  setActiveState(stateName){
-    let name = stateName.name ? stateName.name : stateName;
+  setActiveState(name){
     let state = this.getStateByName(name);
+    if(!state){
+      if(!this.getActiveState().getNextState()){
+        state = this.getNextState();
+      } else {
+        state = this.getStateByName(this.getActiveState().getNextState());
+      }
+    }
     let currentState = this._activeState;
 
     if(this._activeState){
       currentState.visible = false;
-      currentState.dispose()
-      this._stage.removeChild(currentState);
+      // currentState.dispose()
+      // this._stage.removeChild(currentState);
     }
     this._activeState = state;
+    this._activeState.visible = true;
     this._stage.addChild(state);
 
   }

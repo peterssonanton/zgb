@@ -12,8 +12,9 @@ class InteractiveSprite extends PIXI.Sprite{
     //override
   }
 
-  onHit(collision){
-    console.log(collision)
+  isHit(collision, hitBy){
+    return collision;
+  //  console.log(this.name, collision, hitBy)
   }
 
   dispose(){

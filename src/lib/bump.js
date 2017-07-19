@@ -601,7 +601,6 @@ var Bump = (function () {
   }, {
     key: "rectangleCollision",
     value: function rectangleCollision(r1, r2) {
-      var bounce = arguments.length <= 2 || arguments[2] === undefined ? false : arguments[2];
       var global = arguments.length <= 2 || arguments[2] === undefined ? true : arguments[2];
 
       //Add collision properties
@@ -660,20 +659,6 @@ var Bump = (function () {
               //Move the rectangle out of the collision
               r1.y = r1.y - overlapY;
             }
-
-            //Bounce
-            if (bounce) {
-              r1.vy *= -1;
-
-              /*Alternative
-              //Find the bounce surface's vx and vy properties
-              var s = {};
-              s.vx = r2.x - r2.x + r2.width;
-              s.vy = 0;
-               //Bounce r1 off the surface
-              //this.bounceOffSurface(r1, s);
-              */
-            }
           } else {
               //The collision is happening on the Y axis
               //But on which side? vx can tell us
@@ -686,20 +671,6 @@ var Bump = (function () {
                 collision = "right";
                 //Move the rectangle out of the collision
                 r1.x = r1.x - overlapX;
-              }
-
-              //Bounce
-              if (bounce) {
-                r1.vx *= -1;
-
-                /*Alternative
-                //Find the bounce surface's vx and vy properties
-                var s = {};
-                s.vx = 0;
-                s.vy = r2.y - r2.y + r2.height;
-                 //Bounce r1 off the surface
-                this.bounceOffSurface(r1, s);
-                */
               }
             }
         } else {

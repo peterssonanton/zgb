@@ -17,6 +17,12 @@ class Game {
 
     Utils.scaleToWindow(this._renderer.view);
     Input.init(this._renderer);
+    this._states = new StateController(
+      new FirstState('FirstState', 'SecondState'),
+      new SecondState('SecondState', 'FirstState'));
+
+    Collision.init(PIXI, this._states);
+    this._states.setActiveState('FirstState');
 
     //load graphics
     this._loadComplete = true;
@@ -25,11 +31,6 @@ class Game {
 
   start(){
     if(this._loadComplete){
-      this._states = new StateController(
-        new FirstState('FirstState'),
-        new SecondState('SecondState'));
-      this._states.setActiveState('FirstState');
-      Collision.init(PIXI, this._states);
 
       this._gameLoop();
     } else {
@@ -39,13 +40,13 @@ class Game {
 
   _gameLoop() {
     //console.log(this._states.getActiveState())
-
-    if(this._states.getActiveState().isCompleted(ENDSTATES.GAME_OVER)){
-      this._states.setActiveState('SecondState');
-    }
+    //
+    // if(this._states.getActiveState().isCompleted()){
+    //   this._states.setActiveState(this._states.getActiveState().getNextState());
+    //   //this._states.setActiveState("NEXT");
+    // }
     this._states.update();
     Input.update();
-    Collision.update();
     requestAnimationFrame(this._gameLoop.bind(this));
     this._renderer.render(this.stage);
   }

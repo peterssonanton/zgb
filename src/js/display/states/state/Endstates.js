@@ -1,6 +1,6 @@
 'use strict';
 
-var ENDSTATES = {
+var Endstates = {
   GAME_OVER : "GAME_OVER",
   SUSPENDED : "SUSPENDED",
   CLEARED : "CLEARED",
