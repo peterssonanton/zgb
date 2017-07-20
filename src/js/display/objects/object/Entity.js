@@ -3,42 +3,64 @@
 class Entity extends InteractiveSprite {
 
   constructor(width, height){
-    super();
-    this.offsetX = 0;
-    this.offsetY = 0;
-    this.hitWidth = width;
-    this.hitHeight = height;
-    this._hitArea = new PIXI.Rectangle(this.offsetX, this.offsetY, this.hitWidth, this.hitHeight);
+    super(width, height);
+
     this._skin = null; // Movieclip
+    this._path = new Array();
   }
 
-  getHitArea(){
-    this._hitArea.x = this.x + this.offsetX;
-    this._hitArea.y = this.y + this.offsetY;
-    this._hitArea.width = this.hitWidth;
-    this._hitArea.height = this.hitHeight;
-    return this._hitArea;
 
-  }
+  setSkinSprite(texture){
 
-  drawHitArea(){
-    let hitbox = new PIXI.Graphics();
-      hitbox.beginFill(0xFF700B, 0.5);
-      hitbox.drawRect(this.offsetX, this.offsetY, this.hitWidth, this.hitHeight);
-      hitbox.endFill();
-      this.addChild(hitbox)
-  }
-
-  resizeHitArea(offsetX, offsetY, width, height){
-    this.offsetX = offsetX || this.offsetX;
-    this.offsetY = offsetY || this.offsetY;
-    this.hitWidth = width || this.hitWidth;
-    this.hitHeight = height || this.hitHeight;
-  }
-
-  setSkin(){
-    this._skin = new PIXI.Sprite(PIXI.Texture.fromImage('assets/58.79.png'));
+    this._skin = new PIXI.Sprite(PIXI.loader.resources.dog.texture);
+    this._skin.x = -this._skin.texture.width/2;
+    this._skin.y = -this._skin.texture.height/2;
+    //this._skin.x = -240/2;
+    //this._skin.y = -240/2;
     this.addChild(this._skin);
+    console.log(this.texture.width)
   }
 
+  setPathToMove(...points){
+    this._path = points;
+  }
+
+  moveTo(destination){
+    console.log(this._skin.texture.height)
+
+    let toX;
+    let toY;
+
+    toX = destination.x - this.x;
+    toY = destination.y - this.y;
+
+    //TODO: 0 / 0 becomes NaN
+    let distance = Math.sqrt(toX * toX + toY * toY);
+    toX = toX / distance;
+    toY = toY / distance;
+
+    this.x += toX * this.speed;
+    this.y += toY * this.speed;
+  }
+
+  getPosition(){
+    return new PIXI.Point(this.x, this.y);
+  }
+
+  movePath(repeat){
+    let destination = this._path[0];
+    if(destination){
+      this.moveTo(destination);
+      console.log(destination, this.x, this.y);
+
+      //if(Collision.hitTestPointRectangle(destination, this.getHitArea())){
+      // replace with hittest when hitbox is fixed
+      if(Utils.isInRange(this.getPosition(), destination, 10)){
+        this._path.splice(0,1);
+        if(repeat){
+          this._path.push(destination);
+        }
+      }
+    }
+  }
 }

@@ -46,4 +46,9 @@ class Collision {
       }
     }
   }
+
+  static hitTestPointRectangle(point, rectangle){
+    let hit = this._bump.hitTestPoint(point, rectangle);
+    return hit;
+  }
 }

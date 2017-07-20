@@ -10,6 +10,17 @@ class Game {
   }
 
   _loadGame(){
+
+    //load graphics
+    var self = this;
+    PIXI.loader
+      .add('dog', 'assets/58.79.png')
+      .load(function(){
+        self.setupGame()
+      });
+  }
+
+  setupGame(){
     this._renderer = new PIXI.autoDetectRenderer(CONFIG.canvas.width, CONFIG.canvas.height, CONFIG.canvas.options);
     document.body.appendChild(this._renderer.view);
     this.stage = new PIXI.Container();
@@ -17,21 +28,19 @@ class Game {
 
     Utils.scaleToWindow(this._renderer.view);
     Input.init(this._renderer);
+
     this._states = new StateController(
       new FirstState('FirstState', 'SecondState'),
       new SecondState('SecondState', 'FirstState'));
 
     Collision.init(PIXI, this._states);
     this._states.setActiveState('FirstState');
-
-    //load graphics
     this._loadComplete = true;
     this.start();
   }
 
   start(){
     if(this._loadComplete){
-
       this._gameLoop();
     } else {
       this._loadGame();

@@ -107,6 +107,17 @@ var Utils = {
     if (collision.size === 0) collision = undefined;
       //Return the `collision` value
       return collision;
-    }
+    },
+
+  between : function (x, min, max) {
+    console.log(x >= min && x <= max)
+      return x >= min && x <= max;
+  },
+
+  isInRange:function(point1, point2, range){
+    return (Utils.between(point1.x, point2.x - range, point2.x + range) && Utils.between(point1.y, point2.y - range, point2.y + range));
+
+
+  }
 
 }

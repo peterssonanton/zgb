@@ -25,19 +25,12 @@ class FirstState extends State {
 
   //  console.log(this.sprite)
     this.layer.addChild(this.sprite);
-//    this.layer2.addChild(this.sprite2);
-
-//    this.sprite2.name ="SECOND";
-    this.sprite.name ="FIRST";
-    // this.sprite2.y = 450;
-    // this.sprite2.x = 500;
-    // this.sprite2.direction = "UP";
-    this.sprite.direction = "RIGHT";
+    this.sprite.setPathToMove({x:200, y:2}, {x:1,y:400});
 
   }
 
   update(){
-
+    //console.log(GAME.stage)
     // let c = Collision.hitTestSprite(this.sprite, this.sprite2);
   //  console.log("AAAAAAA", c)
 
