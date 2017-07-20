@@ -16,15 +16,19 @@ class TestSprite extends Entity {
   }
 
   update(){
-  //  console.log(Input.getPointerPosition(), this.getHitArea())
-    if(this.direction=="UP"){
-      this.y -= 1;
-    } else {
-      this.x += 1;
-    }
-    if(this.x > 600){
-      this.x = 0;
-    }
+    if(Input.ARROW_LEFT) this.x -= 2;
+    if(Input.ARROW_UP) this.y -= 2;
+    if(Input.ARROW_RIGHT) this.x += 2;
+    if(Input.ARROW_DOWN) this.y += 2;
+    //  console.log(Input.getPointerPosition(), this.getHitArea())
+    // if(this.direction=="UP"){
+    //   this.y -= 1;
+    // } else {
+    //   this.x += 1;
+    // }
+    // if(this.x > 600){
+    //   this.x = 0;
+    // }
   }
 
   dispose(){

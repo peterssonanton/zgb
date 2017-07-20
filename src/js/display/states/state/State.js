@@ -9,14 +9,7 @@ class State extends PIXI.Container{
     this._layers = new Set();
     this._isCompleted = false;
     this.paused = false;
-  }
-
-  reset(options){
-
-  }
-
-  resume(options){
-
+    this.canBeResumed = true;
   }
 
   run(){
@@ -60,5 +53,9 @@ class State extends PIXI.Container{
 
   getNextState(){
     return this._nextState;
+  }
+
+  resume(){
+    this._isCompleted = false;
   }
 }

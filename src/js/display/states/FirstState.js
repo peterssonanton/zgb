@@ -21,33 +21,29 @@ class FirstState extends State {
   setup(){
 
     this.sprite = new TestSprite();
-    this.sprite2 = new TestSprite();
-    this.sprite3 = new TestSprite();
+    //this.sprite2 = new TestSprite();
 
   //  console.log(this.sprite)
     this.layer.addChild(this.sprite);
-    this.layer2.addChild(this.sprite2);
-    this.layer2.addChild(this.sprite3);
-    this.sprite3.name ="THRIRD";
+//    this.layer2.addChild(this.sprite2);
 
-    this.sprite2.name ="SECOND";
+//    this.sprite2.name ="SECOND";
     this.sprite.name ="FIRST";
-    this.sprite3.y = 500;
-    this.sprite3.x = 600;
-    this.sprite3.direction = "UP";
-    this.sprite2.y = 450;
-    this.sprite2.x = 500;
-    this.sprite2.direction = "UP";
+    // this.sprite2.y = 450;
+    // this.sprite2.x = 500;
+    // this.sprite2.direction = "UP";
     this.sprite.direction = "RIGHT";
 
   }
 
   update(){
 
-    let c = Collision.hitTestSprite(this.sprite, this.sprite2);
+    // let c = Collision.hitTestSprite(this.sprite, this.sprite2);
   //  console.log("AAAAAAA", c)
 
-    if(c){
+    if(this.sprite.y > 600){
+      console.log("COMPLETED")
+      this.sprite.y = 599;
       this.stateIsCompleted();
     }
   }

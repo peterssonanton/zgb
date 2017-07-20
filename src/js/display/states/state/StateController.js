@@ -27,17 +27,17 @@ class StateController {
         state = this.getStateByName(this.getActiveState().getNextState());
       }
     }
-    let currentState = this._activeState;
 
-    if(this._activeState){
-      currentState.visible = false;
-      // currentState.dispose()
-      // this._stage.removeChild(currentState);
+    if(!state.isCompleted || state.canBeResumed){
+      state.resume();
+      if(this._activeState){
+        this._activeState.visible = false;
+      }
+      this._activeState = state;
+      this._activeState.visible = true;
+      this._stage.addChild(state);
+      console.log(this._states)
     }
-    this._activeState = state;
-    this._activeState.visible = true;
-    this._stage.addChild(state);
-
   }
 
   getStateByName(name){

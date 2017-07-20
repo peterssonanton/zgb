@@ -16,12 +16,14 @@ class SecondState extends State {
       this.sprite = new TestSprite();
       this.layer.addChild(this.sprite);
       this.sprite.x = 100;
-      this.sprite.y=400
+      this.sprite.y=-50
   }
 
   update(){
-      if(this.sprite.x>=550){
-        this.stateIsCompleted('FirstState');
+      if(this.sprite.y < -50){
+        console.log("completerd 2")
+        this.sprite.y =-45;
+        this.stateIsCompleted('FirstState', true);
       }
   }
 }
