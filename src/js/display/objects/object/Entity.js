@@ -5,20 +5,41 @@ class Entity extends InteractiveSprite {
   constructor(width, height){
     super(width, height);
 
-    this._skin = null; // Movieclip
+    this._skin = null;
     this._path = new Array();
+    this.isMoving=false;
   }
 
 
   setSkinSprite(texture){
 
     this._skin = new PIXI.Sprite(PIXI.loader.resources.dog.texture);
+    this.addChild(this._skin);
+
     this._skin.x = -this._skin.texture.width/2;
     this._skin.y = -this._skin.texture.height/2;
-    //this._skin.x = -240/2;
-    //this._skin.y = -240/2;
+  }
+
+  setSkinMovieClip(movieClip){
+
+    this._skin = movieClip;
+
     this.addChild(this._skin);
-    console.log(this.texture.width)
+
+    this._skin.x = -this._skin.texture.width/2;
+    this._skin.y = -this._skin.texture.height/2;
+  }
+
+  play(state){
+    this._skin.playAnimation([0,3])
+  }
+
+  moveDirection(direction, duration){
+
+  }
+
+  getPosition(){
+    return new PIXI.Point(this.x, this.y);
   }
 
   setPathToMove(...points){
@@ -26,8 +47,6 @@ class Entity extends InteractiveSprite {
   }
 
   moveTo(destination){
-    console.log(this._skin.texture.height)
-
     let toX;
     let toY;
 
@@ -43,15 +62,10 @@ class Entity extends InteractiveSprite {
     this.y += toY * this.speed;
   }
 
-  getPosition(){
-    return new PIXI.Point(this.x, this.y);
-  }
-
-  movePath(repeat){
+  movePath(repeat){ // pause
     let destination = this._path[0];
     if(destination){
       this.moveTo(destination);
-      console.log(destination, this.x, this.y);
 
       //if(Collision.hitTestPointRectangle(destination, this.getHitArea())){
       // replace with hittest when hitbox is fixed

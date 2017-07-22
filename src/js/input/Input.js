@@ -2,10 +2,9 @@
 
 class Input {
 
-  static init(renderer){
-    this._tink = new Tink(PIXI, renderer.view);
+  static init(renderer, scale){
+    this._tink = new Tink(PIXI, renderer.view, scale);
     this._initKeys();
-    renderer.view
     this._pointer = this._tink.makePointer();
 
     this._keyLeft = this._tink.keyboard(37);
@@ -42,6 +41,16 @@ class Input {
   }
 
   static getPointerPosition(){
+    console.log("===========")
+        console.log("===========")
+    console.log("===========")
+
+    console.log(this._pointer.x, this._pointer.y)
+    console.log(new PIXI.Point(this._pointer.x, this._pointer.y));
+    console.log("===========")
+    console.log("===========")
+    console.log("===========")
+
     return new PIXI.Point(this._pointer.x, this._pointer.y);
   }
 

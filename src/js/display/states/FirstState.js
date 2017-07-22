@@ -22,15 +22,22 @@ class FirstState extends State {
 
     this.sprite = new TestSprite();
     //this.sprite2 = new TestSprite();
-
+    this.sprite.position.x = 500;
+    this.sprite.position.y=400;
   //  console.log(this.sprite)
     this.layer.addChild(this.sprite);
+
     this.sprite.setPathToMove({x:200, y:2}, {x:1,y:400});
 
+    //let texture = PIXI.Texture.fromImage(PIXI.loader.resources.ac.texture);
+    // this.s = PIXI.Sprite.fromImage(PIXI.loader.resources.ac.texture);
+    // this.s.position.x = x;
+    // this.s.position.y = y;
+    // this.s.alpha = 0.5;
+    // GAME.stage.addChild(this.s)
   }
 
   update(){
-    //console.log(GAME.stage)
     // let c = Collision.hitTestSprite(this.sprite, this.sprite2);
   //  console.log("AAAAAAA", c)
 

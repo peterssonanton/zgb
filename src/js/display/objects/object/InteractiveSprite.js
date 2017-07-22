@@ -34,7 +34,6 @@ class InteractiveSprite extends PIXI.Sprite{
 
   isHit(collision, hitBy){
     return collision;
-  //  console.log(this.name, collision, hitBy)
   }
 
   getHitArea(){
@@ -42,9 +41,6 @@ class InteractiveSprite extends PIXI.Sprite{
     this._hitArea.y = this.y + this.offsetY;
     this._hitArea.width = this.hitWidth;
     this._hitArea.height = this.hitHeight;
-    if(isNaN(this._hitArea.x) || isNaN(this._hitArea.y)){
-      console.log(this._hitArea)
-    }
     return this._hitArea;
 
   }
@@ -52,7 +48,8 @@ class InteractiveSprite extends PIXI.Sprite{
   drawHitArea(){
     let hitbox = new PIXI.Graphics();
       hitbox.beginFill(0xFF700B, 0.5);
-      hitbox.drawRect(this.offsetX, this.offsetY, this.hitWidth, this.hitHeight);
+      hitbox.drawRect(0,0,50,50);
+      //hitbox.drawRect(this.offsetX, this.offsetY, this.hitWidth, this.hitHeight);
       hitbox.endFill();
       this.addChild(hitbox)
   }
