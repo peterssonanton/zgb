@@ -41,16 +41,6 @@ class Input {
   }
 
   static getPointerPosition(){
-    console.log("===========")
-        console.log("===========")
-    console.log("===========")
-
-    console.log(this._pointer.x, this._pointer.y)
-    console.log(new PIXI.Point(this._pointer.x, this._pointer.y));
-    console.log("===========")
-    console.log("===========")
-    console.log("===========")
-
     return new PIXI.Point(this._pointer.x, this._pointer.y);
   }
 

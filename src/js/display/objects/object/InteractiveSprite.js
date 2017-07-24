@@ -2,15 +2,15 @@
 
 class InteractiveSprite extends PIXI.Sprite{
 
-  constructor(width, height){
-    super();
+  constructor(texture){
+    super(texture);
     this.interactive = true;
     this.shouldUpdate = true;
 
     this.offsetX = 0;
     this.offsetY = 0;
-    this.hitWidth = width;
-    this.hitHeight = height;
+    this.hitWidth = 0;
+    this.hitHeight = 0;
     this._hitArea = new PIXI.Rectangle(this.offsetX, this.offsetY, this.hitWidth, this.hitHeight);
 
     this.destination;
@@ -48,8 +48,8 @@ class InteractiveSprite extends PIXI.Sprite{
   drawHitArea(){
     let hitbox = new PIXI.Graphics();
       hitbox.beginFill(0xFF700B, 0.5);
-      hitbox.drawRect(0,0,50,50);
-      //hitbox.drawRect(this.offsetX, this.offsetY, this.hitWidth, this.hitHeight);
+      //hitbox.drawRect(0,0,50,50);
+    hitbox.drawRect(this.offsetX, this.offsetY, this.hitWidth, this.hitHeight);
       hitbox.endFill();
       this.addChild(hitbox)
   }

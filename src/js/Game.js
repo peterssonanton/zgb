@@ -15,6 +15,7 @@ class Game {
     document.body.appendChild(this._renderer.view);
     this.stage = new PIXI.Container();
     this._renderer.render(this.stage);
+    console.log(PIXI.settings)
 
     var self = this;
     PIXI.loader
@@ -22,6 +23,8 @@ class Game {
       .add('ac', 'assets/ac.png')
       .add('json', 'assets/testtexture.json')
       .add('lab_char', 'assets/lab_char.json')
+      .add('p2', 'assets/p2_green.json')
+      .add('background', 'assets/bg.png')
       .load(function(){
         self._setupGame()
       });
@@ -31,6 +34,7 @@ class Game {
     this.spriteUtilities = new SpriteUtilities(PIXI);
     this.scale = Utils.scaleToWindow(this._renderer.view);
     Input.init(this._renderer, this.scale);
+    PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 
     this._states = new StateController(
       new FirstState('FirstState', 'SecondState'),

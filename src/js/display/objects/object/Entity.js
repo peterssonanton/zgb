@@ -2,12 +2,12 @@
 
 class Entity extends InteractiveSprite {
 
-  constructor(width, height){
-    super(width, height);
+  constructor(){
+    super();
 
     this._skin = null;
     this._path = new Array();
-    this.isMoving=false;
+    this._framesPlaying;
   }
 
 
@@ -23,19 +23,27 @@ class Entity extends InteractiveSprite {
   setSkinMovieClip(movieClip){
 
     this._skin = movieClip;
-
+    this._skin.fps = 4;
     this.addChild(this._skin);
 
     this._skin.x = -this._skin.texture.width/2;
     this._skin.y = -this._skin.texture.height/2;
+
   }
 
-  play(state){
-    this._skin.playAnimation([0,3])
+  play(frames){
+    if(frames != this._framesPlaying){
+      this._framesPlaying = frames;
+      this._skin.playAnimation(frames)
+    }
   }
 
-  moveDirection(direction, duration){
+  stop(){
+    this._framesPlaying = [];
+  }
 
+  moveDirection(direction){
+    
   }
 
   getPosition(){
@@ -62,17 +70,22 @@ class Entity extends InteractiveSprite {
     this.y += toY * this.speed;
   }
 
-  movePath(repeat){ // pause
-    let destination = this._path[0];
-    if(destination){
-      this.moveTo(destination);
+  movePath(repeat, onArrival){ // pause
+    if(this._path[0]){
+      let destination = this._path[0].point || 0;
+      let animation = this._path[0].direction || 0;
 
-      //if(Collision.hitTestPointRectangle(destination, this.getHitArea())){
-      // replace with hittest when hitbox is fixed
-      if(Utils.isInRange(this.getPosition(), destination, 10)){
-        this._path.splice(0,1);
-        if(repeat){
-          this._path.push(destination);
+      if(destination){
+        this.moveTo(destination);
+        this.play(animation);
+        //if(Collision.hitTestPointRectangle(destination, this.getHitArea())){
+        // replace with hittest when hitbox is fixed
+        if(Utils.isInRange(this.getPosition(), destination, 10)){
+            this._path.splice(0,1);
+            this.stop();
+          if(onArrival){
+              onArrival();
+          };
         }
       }
     }

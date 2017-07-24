@@ -82,10 +82,24 @@ var Utils = {
       return x >= min && x <= max;
   },
 
-  isInRange:function(point1, point2, range){
+  isInRange : function(point1, point2, range){
     return (Utils.between(point1.x, point2.x - range, point2.x + range) && Utils.between(point1.y, point2.y - range, point2.y + range));
 
 
+  },
+
+  getDirection:function(p1, p2){
+    let angle = Math.atan2(p2.y - p1.y, p2.x - p1.x) * 180 / Math.PI;
+    console.log(angle);
+    if(angle >= -125 && angle <= -60) {
+      return Direction.UP;
+    } else if(angle > -60 && angle < 55){
+      return Direction.RIGHT;
+    } else if(angle >= 55 && angle < 125){
+      return Direction.DOWN;
+    } else {
+      return Direction.LEFT;
+    }
   }
 
 }
