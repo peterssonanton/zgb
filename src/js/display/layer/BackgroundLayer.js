@@ -1,6 +1,6 @@
 'use strict';
 
-class Layer extends PIXI.extras.TilingSprite {
+class BackgroundLayer extends PIXI.TilingSprite {
   constructor(texture, width, height){
     super(texture, width, height);
     this.velocityX = 0;
@@ -12,8 +12,8 @@ class Layer extends PIXI.extras.TilingSprite {
   }
 
   update(){
-    this.tilePosition.x = this.velocityX;
-    this.tilePosition.y = this.velocityY;
+    this.tilePosition.x += this.velocityX;
+    this.tilePosition.y += this.velocityY;
     this.getChildren().forEach(function(child) {
       if(child.shouldUpdate){
         child.update();
@@ -21,7 +21,7 @@ class Layer extends PIXI.extras.TilingSprite {
     });
   }
 
-  startScroll(){
+  startScroll(x, y){
     this.velocityX = x;
     this.velocityY = y;
   }

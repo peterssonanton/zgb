@@ -29,7 +29,7 @@ class State extends PIXI.Container{
   }
 
   addChild(child){
-    if((child instanceof Layer) || (child instanceof ParticleLayer)){
+    if((child instanceof Layer) || (child instanceof ParticleLayer) || (child instanceof BackgroundLayer)){
       this._layers.add(child);
       super.addChild(child);
     } else {

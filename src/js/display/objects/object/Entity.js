@@ -8,6 +8,8 @@ class Entity extends InteractiveSprite {
     this._skin = null;
     this._path = new Array();
     this._framesPlaying;
+    this._repeatPath = false;
+    this._pathActive = false;
   }
 
 
@@ -42,6 +44,7 @@ class Entity extends InteractiveSprite {
   }
 
   moveDirection(direction){
+    console.log(direction)
     if(direction == Direction.UP){
       this.y -= this.speed;
     }
@@ -60,8 +63,9 @@ class Entity extends InteractiveSprite {
     return new PIXI.Point(this.x, this.y);
   }
 
-  setPathToMove(...points){
+  setPathToMove(repeat, ...points){
     this._path = points;
+    this._repeatPath = repeat;
   }
 
   setDestination(destination){
@@ -85,30 +89,31 @@ class Entity extends InteractiveSprite {
       this.y += toY * this.speed;
 
       if(Utils.isInRange(this.getPosition(), this.destination, 5)){
-        this.resetDestination();
+        if(this._pathActive){
+          this.updatePath();
+        }else {
+          this.resetDestination();
+        }
       }
     }
   }
 
-  movePath(repeat, onArrival){ // pause
-    if(this._path[0]){
-      let destination = this._path[0].point || 0;
-      let animation = this._path[0].direction || 0;
-
-      if(destination){
-        this.moveTo(destination);
-        this.play(animation);
-        //if(Collision.hitTestPointRectangle(destination, this.getHitArea())){
-        // replace with hittest when hitbox is fixed
-        if(Utils.isInRange(this.getPosition(), destination, 10)){
-            this._path.splice(0,1);
-            this.stop();
-          if(onArrival){
-              onArrival();
-          };
-        }
+  updatePath(){
+    if(this._path[1]){
+      if(this._repeatPath){
+        this._path.push(this._path[0])
       }
+      this._path.splice(0,1);
+      this.destination = this._path[0].point;
+    } else {
+      this._pathActive = false;
     }
+    // add animation
+  }
+
+  movePath(){ // pause
+    this.destination = this._path[0].point;
+    this._pathActive = true;
   }
 
   resetDestination(){

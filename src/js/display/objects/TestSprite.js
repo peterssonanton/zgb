@@ -29,27 +29,12 @@ class TestSprite extends Entity {
     s.fps = 2;
 
     this.setSkinMovieClip(s);
-    this.setPathToMove(
+    this.setPathToMove(false,
       {point:{x:600, y:400}, direction:this.states.idleRight},
       {point:{x:300, y:200}, direction:this.states.idleLeft},
       {point:{x:300, y:400}, direction:this.states.idleDown},
       {point:{x:400, y:400}, direction:this.states.idleRight});
-    this.play(this.states.idleRight);
-    let d = new Dialogue(this);
-
-    d.add(
-      {key:"test1",
-      message:"etsadasdas",
-      duration:3000,
-      position:{x:-50, y:-80, container: this}})
-      .add(
-      {key:"test2",
-      message:"asdasdasdasdasdande",
-      duration:3000,
-      position:{x:80, y:100, container: this}});
-
-    //.display("adasdasd", 1000, {container:this, x:-50, y:-80});
-    d.display("test1", "test2");
+  
     this.frames = this.states.idleDown;
 
   }
@@ -57,27 +42,31 @@ class TestSprite extends Entity {
   update(){
     if(Input.ARROW_LEFT){
       this.direction = Direction.LEFT;
+      this.moveDirection(this.direction);
     }
     if(Input.ARROW_UP) {
       this.direction = Direction.UP;
+      this.moveDirection(this.direction);
     }
     if(Input.ARROW_RIGHT){
-      this.direction = Direction.RIGHT
+      this.direction = Direction.RIGHT;
+      this.moveDirection(this.direction);
     }
     if(Input.ARROW_DOWN){
       this.direction = Direction.DOWN;
+      this.moveDirection(this.direction);
     }
 
-      //this.moveDirection(this.direction)
     if(Input.MOUSE_LEFT_DOWN){
         this.direction = Utils.getDirection({x:this.x, y:this.y}, Input.getPointerPosition());
         this.setDestination(Input.getPointerPosition());
     } else {
-    //  this.resetDestination();
+      this.resetDestination();
     }
 
     if(Input.MOUSE_RIGHT_DOWN){
       // SHOOT
+      this.direction = Utils.getDirection({x:this.x, y:this.y}, Input.getPointerPosition());
       console.log("SHOOT")
     }
 

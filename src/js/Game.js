@@ -38,11 +38,11 @@ class Game {
     PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 
     this._states = new StateController(
-      new FirstState('FirstState', 'SecondState'),
-      new SecondState('SecondState', 'FirstState'));
+      new MenuScreen('Menu', 'Level1'),
+      new Level1('Level1'));
 
     Collision.init(PIXI, this._states);
-    this._states.setActiveState('FirstState');
+    this._states.setActiveState('Menu');
     this._loadComplete = true;
     this.start();
   }
