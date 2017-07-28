@@ -1,0 +1,84 @@
+{"frames": {
+
+"idle1.png":
+{
+	"frame": {"x":0,"y":0,"w":37,"h":61},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":61},
+	"sourceSize": {"w":37,"h":61},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"idle2.png":
+{
+	"frame": {"x":37,"y":0,"w":37,"h":61},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":61},
+	"sourceSize": {"w":37,"h":61},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"idle3.png":
+{
+	"frame": {"x":74,"y":0,"w":37,"h":61},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":61},
+	"sourceSize": {"w":37,"h":61},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"idle4.png":
+{
+	"frame": {"x":111,"y":0,"w":38,"h":61},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":38,"h":61},
+	"sourceSize": {"w":38,"h":61},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"idle5.png":
+{
+	"frame": {"x":149,"y":0,"w":37,"h":61},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":61},
+	"sourceSize": {"w":37,"h":61},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"idle6.png":
+{
+	"frame": {"x":186,"y":0,"w":37,"h":61},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":61},
+	"sourceSize": {"w":37,"h":61},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"idle7.png":
+{
+	"frame": {"x":223,"y":0,"w":37,"h":61},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":61},
+	"sourceSize": {"w":37,"h":61},
+	"pivot": {"x":0.5,"y":0.5}
+},
+"idle8.png":
+{
+	"frame": {"x":260,"y":0,"w":37,"h":61},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":37,"h":61},
+	"sourceSize": {"w":37,"h":61},
+	"pivot": {"x":0.5,"y":0.5}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "char.png",
+	"format": "RGBA8888",
+	"size": {"w":297,"h":61},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:637f85dd979df5090d1cb33d2074df74:a8aa40e247d6e377bbe29633dcda8ba2:e951557f161ea273eed4923d8dab8014$"
+}
+}

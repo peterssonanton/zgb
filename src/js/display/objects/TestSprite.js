@@ -10,18 +10,24 @@ class TestSprite extends Entity {
   //  this.drawHitArea();
     var id = PIXI.loader.resources.p2.textures;
     var frames = new Array();
-    for(let i = 1; i < 17; i++){
-      let frameId = "p2_idle_"+i+".png";
+    for(let i = 1; i < 9; i++){
+      let frameId = "idle"+i+".png";
       frames.push(frameId);
     }
+    PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
+     PIXI.settings.SCALE_MODE;
+
 
         let s = GAME.spriteUtilities.sprite(frames,0,0);
+        console.log(s)
     this.states = {
-      idleUp: [0, 3],
-      idleLeft: [8, 11],
-      idleDown: [4, 7],
-      idleRight: [12, 15]
+      idleUp: [2, 3],
+      idleLeft: [4,5],
+      idleDown: [0,1],
+      idleRight: [6, 7]
     };
+    s.fps = 2;
+
     this.setSkinMovieClip(s);
     this.setPathToMove(
       {point:{x:600, y:400}, direction:this.states.idleRight},
@@ -32,58 +38,69 @@ class TestSprite extends Entity {
     let d = new Dialogue(this);
 
     d.add(
-      {key:"TJENA",
-      message:"ett meddelande",
+      {key:"test1",
+      message:"etsadasdas",
       duration:3000,
       position:{x:-50, y:-80, container: this}})
       .add(
-      {key:"TJENA2",
+      {key:"test2",
       message:"asdasdasdasdasdande",
       duration:3000,
       position:{x:80, y:100, container: this}});
 
     //.display("adasdasd", 1000, {container:this, x:-50, y:-80});
-    d.display("TJENA", "TJENA2")
+    d.display("test1", "test2");
+    this.frames = this.states.idleDown;
+
   }
 
   update(){
+    if(Input.ARROW_LEFT){
+      this.direction = Direction.LEFT;
+    }
+    if(Input.ARROW_UP) {
+      this.direction = Direction.UP;
+    }
+    if(Input.ARROW_RIGHT){
+      this.direction = Direction.RIGHT
+    }
+    if(Input.ARROW_DOWN){
+      this.direction = Direction.DOWN;
+    }
+
+      //this.moveDirection(this.direction)
     if(Input.MOUSE_LEFT_DOWN){
-
-      let direction = Utils.getDirection({x:this.x, y:this.y}, Input.getPointerPosition());
-      let frames;
-      if(direction == Direction.UP) {
-        frames = this.states.idleUp;
-      }
-      else if(direction == Direction.DOWN){
-        frames = this.states.idleDown;
-      } else if(direction == Direction.RIGHT) {
-        frames = this.states.idleRight;
-      }
-      else if(direction == Direction.LEFT){
-        frames = this.states.idleLeft;
-      }
-      this.play(frames);
-      this.moveTo(Input.getPointerPosition());
+        this.direction = Utils.getDirection({x:this.x, y:this.y}, Input.getPointerPosition());
+        this.setDestination(Input.getPointerPosition());
+    } else {
+    //  this.resetDestination();
     }
-    else if(this.destination){
 
-    }
     if(Input.MOUSE_RIGHT_DOWN){
       // SHOOT
       console.log("SHOOT")
     }
 
-    if(Input.ARROW_LEFT){
-      this.x -= 2;
-    }
-    if(Input.ARROW_UP) {
-      this.y -= 2;
-    }
-    if(Input.ARROW_RIGHT){
-      this.x += 2;
-    }
-    if(Input.ARROW_DOWN){
-      this.y += 2;
+    this.move();
+    this.setAnimationState(this.direction);
+    this.play(this.frames);
+    this.direction = null;
+  }
+
+  setAnimationState(direction){// fixa fler
+    switch(direction){
+      case Direction.UP:
+      this.frames = this.states.idleUp;
+      break;
+      case Direction.DOWN:
+      this.frames = this.states.idleDown;
+      break;
+      case Direction.LEFT:
+      this.frames = this.states.idleLeft;
+      break;
+      case Direction.RIGHT:
+      this.frames = this.states.idleRight;
+      break;
     }
   }
 

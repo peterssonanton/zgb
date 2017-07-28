@@ -23,7 +23,6 @@ class Entity extends InteractiveSprite {
   setSkinMovieClip(movieClip){
 
     this._skin = movieClip;
-    this._skin.fps = 4;
     this.addChild(this._skin);
 
     this._skin.x = -this._skin.texture.width/2;
@@ -43,7 +42,18 @@ class Entity extends InteractiveSprite {
   }
 
   moveDirection(direction){
-    
+    if(direction == Direction.UP){
+      this.y -= this.speed;
+    }
+    if(direction == Direction.LEFT){
+      this.x -= this.speed;
+    }
+    if(direction == Direction.DOWN){
+      this.y += this.speed;
+    }
+    if(direction == Direction.RIGHT){
+      this.x += this.speed;
+    }
   }
 
   getPosition(){
@@ -54,20 +64,30 @@ class Entity extends InteractiveSprite {
     this._path = points;
   }
 
-  moveTo(destination){
-    let toX;
-    let toY;
+  setDestination(destination){
+    this.destination = destination;
+  }
 
-    toX = destination.x - this.x;
-    toY = destination.y - this.y;
+  move(){
+    if(this.destination){
+      let toX;
+      let toY;
 
-    //TODO: 0 / 0 becomes NaN
-    let distance = Math.sqrt(toX * toX + toY * toY);
-    toX = toX / distance;
-    toY = toY / distance;
+      toX = this.destination.x - this.x;
+      toY = this.destination.y - this.y;
 
-    this.x += toX * this.speed;
-    this.y += toY * this.speed;
+      //TODO: 0 / 0 becomes NaN
+      let distance = Math.sqrt(toX * toX + toY * toY);
+      toX = toX / distance;
+      toY = toY / distance;
+
+      this.x += toX * this.speed;
+      this.y += toY * this.speed;
+
+      if(Utils.isInRange(this.getPosition(), this.destination, 5)){
+        this.resetDestination();
+      }
+    }
   }
 
   movePath(repeat, onArrival){ // pause
@@ -89,5 +109,9 @@ class Entity extends InteractiveSprite {
         }
       }
     }
+  }
+
+  resetDestination(){
+    this.destination=null;
   }
 }

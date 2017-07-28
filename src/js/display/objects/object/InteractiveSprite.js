@@ -24,7 +24,7 @@ class InteractiveSprite extends PIXI.Sprite{
     this.accelerationY = 0;
     this.frictionX = 1;
     this.frictionY = 1;
-    this.speed = 1;
+    this.speed = 2;
     this.drag = 0.98;
   }
 

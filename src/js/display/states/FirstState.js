@@ -7,8 +7,10 @@ class FirstState extends State {
     //this.name = name || this.constructor.name;
 
     this.layer = new Layer();
+    //  this.stars =  new PIXI.extras.TilingSprite(PIXI.loader.resources.stars.texture,960,640);
     let bg = new InteractiveSprite(PIXI.loader.resources.background.texture);
     this.layer.addChild(bg);
+
     this.layer.on("click", this.test)
     this.addChild(this.layer);
 
@@ -39,6 +41,9 @@ class FirstState extends State {
   update(){
     // let c = Collision.hitTestSprite(this.sprite, this.sprite2);
   //  console.log("AAAAAAA", c)
+
+    // // this.stars.tilePosition.x += 0.1;
+    // this.stars.tilePosition.y += 0.2;
 
     if(this.sprite.y > 600){
       console.log("COMPLETED")

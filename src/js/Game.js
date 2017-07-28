@@ -23,8 +23,9 @@ class Game {
       .add('ac', 'assets/ac.png')
       .add('json', 'assets/testtexture.json')
       .add('lab_char', 'assets/lab_char.json')
-      .add('p2', 'assets/p2_green.json')
+      .add('p2', 'assets/char.json')
       .add('background', 'assets/bg.png')
+      .add('stars', 'assets/bg2.png')
       .load(function(){
         self._setupGame()
       });
